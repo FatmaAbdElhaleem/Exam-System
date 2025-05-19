@@ -43,6 +43,10 @@ export class ExamService {
     return this.http.delete<void>(`${this.apiUrl}/${examId}/questions/${questionId}`, { headers: this.getHeaders() });
   }
 
+  updateQuestion(examId: string, questionId: string, question: { text: string; options: { text: string; isCorrect: boolean }[] }): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${examId}/questions/${questionId}`, question, { headers: this.getHeaders() });
+  }
+
   submitExam(examId: string, answers: { [questionId: string]: number }): Observable<any> {
     return this.http.post(`${this.apiUrl}/${examId}/submit`, { answers }, { headers: this.getHeaders() });
   }
