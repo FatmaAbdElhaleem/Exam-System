@@ -1,0 +1,50 @@
+<div class="container mt-5">
+  <h2>Manage Exams</h2>
+  <div class="card mb-4">
+    <div class="card-body">
+      <h5>Create New Exam</h5>
+      <form (ngSubmit)="createExam()">
+        <div class="mb-3">
+          <label for="title" class="form-label">Title</label>
+          <input
+            type="text"
+            class="form-control"
+            id="title"
+            [(ngModel)]="newExam.title"
+            name="title"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="description" class="form-label">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            id="description"
+            [(ngModel)]="newExam.description"
+            name="description"
+          />
+        </div>
+        <button type="submit" class="btn btn-primary">Create</button>
+      </form>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4" *ngFor="let exam of exams">
+      <div class="card mb-4">
+        <div class="card-body">
+          <h5 class="card-title">{{ exam.title }}</h5>
+          <p class="card-text">{{ exam.description || "No description" }}</p>
+          <a
+            [routerLink]="['/admin/questions', exam._id]"
+            class="btn btn-primary"
+            >Manage Questions</a
+          >
+          <button class="btn btn-danger mt-2" (click)="deleteExam(exam._id)">
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

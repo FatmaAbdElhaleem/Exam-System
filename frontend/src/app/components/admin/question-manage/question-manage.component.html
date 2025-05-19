@@ -1,0 +1,65 @@
+<div class="container mt-5" *ngIf="exam">
+  <h2>Manage Questions: {{ exam.title }}</h2>
+  <div class="card mb-4">
+    <div class="card-body">
+      <h5>Add New Question</h5>
+      <form (ngSubmit)="addQuestion()">
+        <div class="mb-3">
+          <label for="questionText" class="form-label">Question Text</label>
+          <input
+            type="text"
+            class="form-control"
+            id="questionText"
+            [(ngModel)]="newQuestion.text"
+            name="text"
+            required
+          />
+        </div>
+        <div
+          class="mb-3"
+          *ngFor="let option of newQuestion.options; let i = index"
+        >
+          <label for="option{{ i }}" class="form-label"
+            >Option {{ i + 1 }}</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="option{{ i }}"
+            [(ngModel)]="option.text"
+            [name]="'option' + i"
+            required
+          />
+          <div class="form-check mt-2">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="correct{{ i }}"
+              [(ngModel)]="option.isCorrect"
+              [name]="'isCorrect' + i"
+            />
+            <label class="form-check-label" for="correct{{ i }}"
+              >Correct Answer</label
+            >
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Question</button>
+      </form>
+    </div>
+  </div>
+  <div *ngFor="let question of exam.questions">
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5>{{ question.text }}</h5>
+        <ul>
+          <li *ngFor="let option of question.options">
+            {{ option.text }} {{ option.isCorrect ? "(Correct)" : "" }}
+          </li>
+        </ul>
+        <button class="btn btn-danger" (click)="deleteQuestion(question._id)">
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

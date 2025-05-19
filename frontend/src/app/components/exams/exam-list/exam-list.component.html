@@ -1,0 +1,16 @@
+<div class="container mt-5">
+  <h2>Available Exams</h2>
+  <div class="row">
+    <div class="col-md-4" *ngFor="let exam of exams">
+      <div class="card mb-4">
+        <div class="card-body">
+          <h5 class="card-title">{{ exam.title }}</h5>
+          <p class="card-text">{{ exam.description || "No description" }}</p>
+          <a [routerLink]="['/exams', exam._id, 'take']" class="btn btn-primary"
+            >Start Exam</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-header">
+      <h3>Exam Result</h3>
+    </div>
+    <div class="card-body">
+      <p>Your Score: {{ result.score }} / {{ result.total }}</p>
+      <p>
+        Percentage:
+        {{ (result.score / result.total) * 100 | number : "1.0-2" }}%
+      </p>
+      <button class="btn btn-primary" (click)="goBack()">Back to Exams</button>
+    </div>
+  </div>
+</div>
